@@ -1,0 +1,32 @@
+﻿@model  MVCTest.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterModel</title>
+</head>
+<body>
+    <div>
+        <form action="RegisterModelFor" method="post">
+            @Html.LabelFor(Model => Model.LoginId)
+            @Html.EditorFor(Model => Model.LoginId)<br />
+            @Html.LabelFor(Model => Model.LoginPwd)
+            @Html.EditorFor(Model => Model.LoginPwd)<br />
+            @Html.LabelFor(Model => Model.Mail)
+            @Html.EditorFor(Model => Model.Mail)<br />
+            @Html.LabelFor(Model => Model.Name)
+            @Html.EditorFor(Model => Model.Name)<br />
+            @Html.LabelFor(Model => Model.QQ)
+            @Html.EditorFor(Model => Model.QQ)<br />
+
+            <input type="submit" value="注册" />
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FromUserId" Type="int" Nullable="false" />
+    <Property Name="ToUserId" Type="int" Nullable="false" />
+    <Property Name="Messages" Type="text" Nullable="false" />
+    <Property Name="MessageTypeId" Type="int" Nullable="false" />
+    <Property Name="MessageState" Type="int" Nullable="false" />
+    <Property Name="MessageTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MessageType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MessageType" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoginPwd" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="NickName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Sex" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="FaceId" Type="int" />
+    <Property Name="FriendShipPolicyId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+    <Property Name="StarId" Type="int" />
+    <Property Name="BloodTypeId" Type="int" />
+  </EntityType>
+  <Association Name="fk_Messages_FromUserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="FromUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Messages_MessageTypeId">
+    <End Role="MessageType" Type="Self.MessageType" Multiplicity="1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MessageType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="MessageTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Messages_ToUserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="ToUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MessageType" EntityType="Self.MessageType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Messages_FromUserId" Association="Self.fk_Messages_FromUserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Messages_MessageTypeId" Association="Self.fk_Messages_MessageTypeId">
+      <End Role="MessageType" EntitySet="MessageType" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Messages_ToUserId" Association="Self.fk_Messages_ToUserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

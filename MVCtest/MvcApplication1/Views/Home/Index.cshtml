@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <a href="@Url.Action("Add", "Home")?id=1">222</a><br />
+        <br />
+        @using (Html.BeginForm("Add","Home",FormMethod.Post))
+        {@Html.ActionLink("a", "Index", "Home", "", new { })
+            @Html.TextBox("id")
+            <br />
+            <input type="submit" />
+        }
+    </div>
+</body>
+</html>

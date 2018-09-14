@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="BookType">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.BookType)">
+        <MappingFragment StoreEntitySet="BookType">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="TypeTitle" ColumnName="TypeTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.BookInfo)">
+        <MappingFragment StoreEntitySet="BookInfo">
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
+          <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+          <ScalarProperty Name="BookTypeTypeId" ColumnName="BookTypeTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

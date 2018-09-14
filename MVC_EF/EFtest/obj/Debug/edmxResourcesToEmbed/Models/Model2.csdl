@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FromUserId" Type="Int32" Nullable="false" />
+    <Property Name="ToUserId" Type="Int32" Nullable="false" />
+    <Property Name="Messages1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MessageTypeId" Type="Int32" Nullable="false" />
+    <Property Name="MessageState" Type="Int32" Nullable="false" />
+    <Property Name="MessageTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="MessageType" Relationship="Self.fk_Messages_MessageTypeId" FromRole="Messages" ToRole="MessageType" />
+    <NavigationProperty Name="User" Relationship="Model.fk_Messages_FromUserId" FromRole="Messages" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Model.fk_Messages_ToUserId" FromRole="Messages" ToRole="User" />
+  </EntityType>
+  <EntityType Name="MessageType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MessageType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Messages" Relationship="Self.fk_Messages_MessageTypeId" FromRole="MessageType" ToRole="Messages" />
+  </EntityType>
+  <Association Name="fk_Messages_MessageTypeId">
+    <End Role="MessageType" Type="Self.MessageType" Multiplicity="1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MessageType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="MessageTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyContextQQ" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Messages" EntityType="Self.Messages" />
+    <EntitySet Name="MessageType" EntityType="Self.MessageType" />
+    <AssociationSet Name="fk_Messages_MessageTypeId" Association="Self.fk_Messages_MessageTypeId">
+      <End Role="MessageType" EntitySet="MessageType" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <EntitySet Name="Users" EntityType="Model.User" />
+    <AssociationSet Name="fk_Messages_FromUserId" Association="Model.fk_Messages_FromUserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Messages_ToUserId" Association="Model.fk_Messages_ToUserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginPwd" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NickName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sex" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="FaceId" Type="Int32" />
+    <Property Name="FriendShipPolicyId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="StarId" Type="Int32" />
+    <Property Name="BloodTypeId" Type="Int32" />
+    <NavigationProperty Name="Messages" Relationship="Model.fk_Messages_FromUserId" FromRole="User" ToRole="Messages" />
+    <NavigationProperty Name="Messages1" Relationship="Model.fk_Messages_ToUserId" FromRole="User" ToRole="Messages" />
+  </EntityType>
+  <Association Name="fk_Messages_FromUserId">
+    <End Type="Model.User" Role="User" Multiplicity="1" />
+    <End Type="Model.Messages" Role="Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="FromUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Messages_ToUserId">
+    <End Type="Model.User" Role="User" Multiplicity="1" />
+    <End Type="Model.Messages" Role="Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="ToUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

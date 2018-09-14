@@ -1,0 +1,24 @@
+﻿@model EFtest.Models.Messages
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Add","Update",FormMethod.Post))
+        {
+            <span>内容:</span>
+            @Html.TextBoxFor(u=>u.Messages1)
+            <br />
+            <input  type="submit" value="添加"/>
+        }
+    </div>
+</body>
+</html>

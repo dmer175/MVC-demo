@@ -1,0 +1,34 @@
+﻿@model IQueryable<EFtest.Models.Messages>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <tr>
+                <th>列1</th>
+                <th>列2</th>
+                <th>类型</th>
+                <th>修改</th>
+            </tr>
+            @foreach (var msg in Model)
+            {
+                <tr>
+                    <td>@msg.Id</td>
+                    <td>@msg.Messages1</td>
+                    <td>@msg.MessageType.MessageType1</td>
+                    <td>@Html.ActionLink("修改", "Edit", "Update2", new RouteValueDictionary(new { id=msg.Id}),null)</td>
+                </tr>
+            }
+        </table>
+</div>
+</body>
+</html>

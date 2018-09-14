@@ -1,0 +1,32 @@
+﻿@model IQueryable<EFtest.Models.bank>
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index2</title>
+    </head>
+    <body>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>列1</th>
+                    <th>列2</th>
+                    <th>列3</th>
+                </tr>
+                @foreach (EFtest.Models.bank ba in Model)
+                {
+                    <tr>
+                        <td>@ba.cardId</td>
+                        <td>@ba.currentMoney</td>
+                        <td>@ba.customerName</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </body>
+</html>

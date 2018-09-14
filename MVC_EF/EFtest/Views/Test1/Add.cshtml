@@ -1,0 +1,41 @@
+﻿@model EFtest.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function Success(msg) {
+            $("#msg").html(msg);
+        }
+    </script>
+</head>
+<body>
+    <span id="msg"></span>
+    @using (Ajax.BeginForm("Add", "Test1", FormMethod.Post, new AjaxOptions() { OnSuccess="Success" }))
+    {
+        <span>密码</span>
+        @Html.TextBoxFor(u=>u.LoginPwd)
+        <br />
+        <span>昵称</span>
+        @Html.TextBoxFor(u=>u.NickName)
+        <br />
+        <span>男</span>
+        @Html.RadioButtonFor(u=>u.Sex,"男")
+        <span>女</span>
+        @Html.RadioButtonFor(u=>u.Sex,"女")
+        <br />
+        <span>年龄</span>
+        @Html.TextBoxFor(u=>u.Age)
+        <br />
+        <input type="submit" value="注册"/>
+    }
+</body>
+</html>

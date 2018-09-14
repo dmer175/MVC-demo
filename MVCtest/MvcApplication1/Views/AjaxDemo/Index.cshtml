@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(function () {
+            $("#btnAdd").click(function () {
+                $.post("@Url.Action("CalcAdd","AjaxDemo")", $("#form1").serialize(), function (data) {
+                    $("#sum").val(data);
+                })
+            })
+        })
+        function Success(obj) {
+            //alert(obj);
+            //console.log(obj);
+            //var sum = JSON.parse(obj).sum;
+            //alert(sum);
+            //$("#result").val(sum);
+            //console.log(JSON.parse(obj));
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <form id="form1">
+            <input type="text" name="calc1" />+
+            <input type="text" name="calc2" />
+            <input type="button" id="btnAdd" value="加" />
+            <input type="text" name="sum" id="sum" />
+        </form>
+        <hr />
+        @using (Ajax.BeginForm("CalcAdd1", "AjaxDemo", new AjaxOptions()
+        {
+            OnSuccess = "Success",
+            HttpMethod="post",
+            UpdateTargetId = "result",
+            InsertionMode= InsertionMode.Replace
+        }))
+        {
+            <input type="text" name="calc1"/>
+            <span>+</span>
+            <input type="text" name="calc2" />
+            <input type="submit" value="=" />
+            <input type="text" id="result"/>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bankdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“bankdb.dbo.backuptable”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="backuptable">
+          <Key>
+            <PropertyRef Name="cardId" />
+            <PropertyRef Name="transType" />
+            <PropertyRef Name="transMoney" />
+            <PropertyRef Name="transDate" />
+          </Key>
+          <Property Name="cardId" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="transType" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="transMoney" Type="money" Nullable="false" />
+          <Property Name="transDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“bankdb.dbo.bank”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="bank">
+          <Key>
+            <PropertyRef Name="customerName" />
+            <PropertyRef Name="cardId" />
+            <PropertyRef Name="currentMoney" />
+          </Key>
+          <Property Name="customerName" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="cardId" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="currentMoney" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="bankdbModelStoreContainer">
+          <EntitySet Name="backuptable" EntityType="Self.backuptable" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[backuptable].[cardId] AS [cardId], 
+[backuptable].[transType] AS [transType], 
+[backuptable].[transMoney] AS [transMoney], 
+[backuptable].[transDate] AS [transDate]
+FROM [dbo].[backuptable] AS [backuptable]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="bank" EntityType="Self.bank" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[bank].[customerName] AS [customerName], 
+[bank].[cardId] AS [cardId], 
+[bank].[currentMoney] AS [currentMoney]
+FROM [dbo].[bank] AS [bank]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bankdbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="backuptable">
+          <Key>
+            <PropertyRef Name="cardId" />
+            <PropertyRef Name="transType" />
+            <PropertyRef Name="transMoney" />
+            <PropertyRef Name="transDate" />
+          </Key>
+          <Property Name="cardId" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="transType" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="transMoney" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="transDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="bank">
+          <Key>
+            <PropertyRef Name="customerName" />
+            <PropertyRef Name="cardId" />
+            <PropertyRef Name="currentMoney" />
+          </Key>
+          <Property Name="customerName" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cardId" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="currentMoney" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="backuptable" EntityType="Self.backuptable" />
+          <EntitySet Name="bank" EntityType="Self.bank" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bankdbModelStoreContainer" CdmEntityContainer="MyContext">
+          <EntitySetMapping Name="backuptable">
+            <EntityTypeMapping TypeName="bankdbModel.backuptable">
+              <MappingFragment StoreEntitySet="backuptable">
+                <ScalarProperty Name="cardId" ColumnName="cardId" />
+                <ScalarProperty Name="transType" ColumnName="transType" />
+                <ScalarProperty Name="transMoney" ColumnName="transMoney" />
+                <ScalarProperty Name="transDate" ColumnName="transDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bank">
+            <EntityTypeMapping TypeName="bankdbModel.bank">
+              <MappingFragment StoreEntitySet="bank">
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="cardId" ColumnName="cardId" />
+                <ScalarProperty Name="currentMoney" ColumnName="currentMoney" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

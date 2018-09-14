@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bankdbModelStoreContainer" CdmEntityContainer="MyContext">
+    <EntitySetMapping Name="backuptable">
+      <EntityTypeMapping TypeName="bankdbModel.backuptable">
+        <MappingFragment StoreEntitySet="backuptable">
+          <ScalarProperty Name="cardId" ColumnName="cardId" />
+          <ScalarProperty Name="transType" ColumnName="transType" />
+          <ScalarProperty Name="transMoney" ColumnName="transMoney" />
+          <ScalarProperty Name="transDate" ColumnName="transDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bank">
+      <EntityTypeMapping TypeName="bankdbModel.bank">
+        <MappingFragment StoreEntitySet="bank">
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="cardId" ColumnName="cardId" />
+          <ScalarProperty Name="currentMoney" ColumnName="currentMoney" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

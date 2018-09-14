@@ -1,0 +1,45 @@
+﻿@model MvcApplication3.Models.Student
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+    <div>
+        @ViewBag.cc
+
+
+
+        @Html.DropDownList("list")
+
+        @Html.TextBoxFor(s=>s.Sid)
+        @Html.TextBoxFor(s=>s.Name)
+
+        @{
+            int a1 = 10;
+            string str1 = "<h1>12364</h1>";
+            //Response.Write(a1 + 1);
+    Response.Write(str1);
+        }
+
+        @for (int i = 0; i < 10; i++)
+        {
+            if (i % 2 == 0)
+            {
+                <span>123</span>
+                if (i % 3 == 0)
+                {
+                    @i
+                }
+            }
+        }
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model MVCDemo.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LoginId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LoginId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LoginPwd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LoginPwd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.QQ)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QQ)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Mail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Mail)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BookType" EntityType="Model1.BookType" />
+    <EntitySet Name="BookInfo" EntityType="Model1.BookInfo" />
+    <AssociationSet Name="BookTypeBookInfo" Association="Model1.BookTypeBookInfo">
+      <End Role="BookType" EntitySet="BookType" />
+      <End Role="BookInfo" EntitySet="BookInfo" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BookType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeTitle" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="50" />
+    <NavigationProperty Name="BookInfo" Relationship="Model1.BookTypeBookInfo" FromRole="BookType" ToRole="BookInfo" />
+  </EntityType>
+  <EntityType Name="BookInfo">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookTitle" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="50" />
+    <NavigationProperty Name="BookType" Relationship="Model1.BookTypeBookInfo" FromRole="BookInfo" ToRole="BookType" />
+    <Property Name="BookTypeTypeId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="BookTypeBookInfo">
+    <End Type="Model1.BookType" Role="BookType" Multiplicity="1" />
+    <End Type="Model1.BookInfo" Role="BookInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookType">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="BookInfo">
+        <PropertyRef Name="BookTypeTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,54 @@
+﻿@model IQueryable<EFtest.Models.Messages>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function suc(obj) {
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        @Html.ActionLink("添加","Add","Update")
+        @*<input name="Dname" type="text" value="1" />
+        <input type="submit"/>*@
+        @using (Html.BeginForm("Index", "Update", FormMethod.Post))
+        {
+            @Html.TextBox("str","1")
+            <input type="submit"/>
+        }
+        @*@using (Ajax.BeginForm("Result", "Update", new AjaxOptions() { OnSuccess = "suc" }, FormMethod.Post))
+        {
+            @Html.TextBox("str","1")
+            <input type="submit"/>
+        }*@
+        <table border="1" id="tab">
+            <tr>
+                <th>列1</th>
+                <th>列2</th>
+                <th>修改</th>
+                <th>删除</th>
+            </tr>
+            @foreach (EFtest.Models.Messages msg in Model)
+            {
+                <tr>
+                    <td>@msg.Id</td>
+                    <td>@msg.Messages1</td>
+                    <td>@Html.ActionLink("修改", "Edit", "Update", new RouteValueDictionary(new { id=@msg.Id}),null)</td>
+                    <td>@Html.ActionLink("删除", "Remove", "Update", new RouteValueDictionary(new { id = @msg.Id }), null)</td>
+                </tr>
+            }
+            </table>
+</div>
+</body>
+</html>

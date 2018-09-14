@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="BookType" EntityType="Model1.Store.BookType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BookInfo" EntityType="Model1.Store.BookInfo" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="BookTypeBookInfo" Association="Model1.Store.BookTypeBookInfo">
+      <End Role="BookType" EntitySet="BookType" />
+      <End Role="BookInfo" EntitySet="BookInfo" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BookType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BookInfo">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="BookTypeTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="BookTypeBookInfo">
+    <End Role="BookType" Type="Model1.Store.BookType" Multiplicity="1" />
+    <End Role="BookInfo" Type="Model1.Store.BookInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookType">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="BookInfo">
+        <PropertyRef Name="BookTypeTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

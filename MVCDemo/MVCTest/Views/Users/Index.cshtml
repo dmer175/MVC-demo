@@ -1,0 +1,72 @@
+﻿@*@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/IndexDemo.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/JsDemo.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Users", "Index", FormMethod.Post, new { @id = "form1" }))
+        {
+            <fieldset>
+                <legend>登录界面</legend>
+
+                @Html.Label("账号：")   @Html.TextBox("account", "", new { @onchange = "JsTest()" })
+                @Html.Label("密码：")   @Html.TextBox("password")
+                <input type="submit" value="登录" />
+            </fieldset>
+            <fieldset>
+                <legend>上传头像</legend>
+                <input type="file" name="flContent" onchange="upload()" />
+                <img id="imgDemo" />
+            </fieldset>
+        }
+
+        <div style="width:400px;height:200px;background-color:cadetblue">
+            @* @Html.Partial("PatialDemo");*@
+            @*@{
+                    Html.RenderPartial("PatialDemo");
+                }*@
+        </div>
+        @{
+
+
+            @*string str = "true";
+                if (str == "true")
+                {
+                    <input type="text" name="=aa" />
+                }*@
+
+            string str = "123";
+            if (str.IsInt())
+            {
+                int num = str.AsInt();
+                Response.Write("可以强转：" + num);
+            }
+            else
+            {
+                Response.Write("不可以强转：" + str);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Response.Write("你好！");
+
+            }
+
+
+
+        }
+
+    </div>
+</body>
+</html>

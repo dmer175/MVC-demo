@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @{
+            //foreach (MVCTest.User u in ViewBag.name)
+            //{
+            //    Response.Write(u.Name);
+            //    Response.Write(u.QQ);<br />
+
+
+            foreach (MVCTest.User u in (IEnumerable<MVCTest.User>)TempData["name"])
+            {
+                Response.Write(u.Name);
+                Response.Write(u.QQ);<br />
+            }
+
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bankdbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="backuptable">
+    <Key>
+      <PropertyRef Name="cardId" />
+      <PropertyRef Name="transType" />
+      <PropertyRef Name="transMoney" />
+      <PropertyRef Name="transDate" />
+    </Key>
+    <Property Name="cardId" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="transType" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="transMoney" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="transDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="bank">
+    <Key>
+      <PropertyRef Name="customerName" />
+      <PropertyRef Name="cardId" />
+      <PropertyRef Name="currentMoney" />
+    </Key>
+    <Property Name="customerName" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="cardId" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="currentMoney" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="backuptable" EntityType="Self.backuptable" />
+    <EntitySet Name="bank" EntityType="Self.bank" />
+  </EntityContainer>
+</Schema>

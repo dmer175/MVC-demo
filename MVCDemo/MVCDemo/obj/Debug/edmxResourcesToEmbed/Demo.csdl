@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PubDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Clicks" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Articles_Users" FromRole="Articles" ToRole="Users" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Articles" FromRole="Articles" ToRole="Comments" />
+  </EntityType>
+  <EntityType Name="Blog">
+    <Key>
+      <PropertyRef Name="BlogId" />
+    </Key>
+    <Property Name="BlogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TitleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_dbo_Posts_dbo_Blogs_BlogId" FromRole="Blogs" ToRole="Posts" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ArticleId" Type="Int32" Nullable="false" />
+    <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PubDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Article" Relationship="Self.FK_Comments_Articles" FromRole="Comments" ToRole="Articles" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="PostId" />
+    </Key>
+    <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BlogId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Blog" Relationship="Self.FK_dbo_Posts_dbo_Blogs_BlogId" FromRole="Posts" ToRole="Blogs" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="QQ" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_Articles_Users" FromRole="Users" ToRole="Articles" />
+  </EntityType>
+  <Association Name="FK_Articles_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Articles" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Articles">
+        <PropertyRef Name="AuthorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Articles">
+    <End Role="Articles" Type="Self.Article" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Posts_dbo_Blogs_BlogId">
+    <End Role="Blogs" Type="Self.Blog" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blogs">
+        <PropertyRef Name="BlogId" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="BlogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BlogContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articles" EntityType="Self.Article" />
+    <EntitySet Name="Blogs" EntityType="Self.Blog" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Articles_Users" Association="Self.FK_Articles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Articles" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Articles" Association="Self.FK_Comments_Articles">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Posts_dbo_Blogs_BlogId" Association="Self.FK_dbo_Posts_dbo_Blogs_BlogId">
+      <End Role="Blogs" EntitySet="Blogs" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,29 @@
+﻿<section>
+    <h3>使用AJAX ASP.NET MVC的示例</h3>
+</section>
+<section>
+    <div id="messages">
+
+    </div>
+
+    @using (Ajax.BeginForm("AjaxTest",
+    new AjaxOptions
+    {
+        Confirm = "你真的想发一个消息吗?",
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "messages",
+        OnComplete = "ajaxComplete"
+    }))
+    {
+        @Html.Label("message", "信息")<br />
+        @Html.TextArea("message")<br />
+        <button type="submit">发送</button>
+    }
+
+    <script>
+        function ajaxComplete() {
+            alert("完成");
+        }
+    </script>
+</section>

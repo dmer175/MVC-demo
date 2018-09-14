@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <table style="width:300px;height:300px;background-color:red">
+            <tr style="height:20%">
+                <td style="width:20%">
+                <td>
+                    @*@Html.Partial("PartialDemo") *@
+                    @{
+                        
+                        Html.RenderPartial("PartialDemo");
+                    }   
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@RenderBody();</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

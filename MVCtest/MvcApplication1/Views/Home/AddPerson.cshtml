@@ -1,0 +1,23 @@
+﻿@model MvcApplication1.Models.Person
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddPerson</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("AddPerson","Home",FormMethod.Post))
+        {
+            <span>年龄:</span>@Html.TextBoxFor(p => p.Age)<br />
+                            <span>qq:</span>@Html.TextBoxFor(p => p.QQ)<br />
+            <input type="submit" />
+        }
+    </div>
+</body>
+</html>

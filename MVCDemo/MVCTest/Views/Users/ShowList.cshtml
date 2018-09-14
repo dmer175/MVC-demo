@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MVCTest.User>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowList</title>
+</head>
+<body>
+    <div>
+        <table style="width:500px;height:500px;background-color:cadetblue">
+            @{
+                foreach (MVCTest.User u in Model)
+                {
+                    @*<tr>
+
+                            <th>@Html.Label(u.QQ)</th>
+                            <th>@Html.Label(u.Name)</th>
+                            <th>@Html.Label(u.LoginPwd)</th>
+                            <th>@Html.Label(u.LoginId)</th>
+                            <th>@Html.Label(u.Mail)</th>
+                        </tr>*@
+                    <tr>
+
+                        <th>@Html.DisplayFor(m => u.Name)</th>
+                        <th>@Html.DisplayFor(m => u.Mail)</th>
+                        <th>@Html.DisplayFor(m => u.QQ)</th>
+                        <th>@Html.DisplayFor(m => u.LoginId)</th>
+                        <th>@Html.DisplayFor(m => u.LoginPwd)</th>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+</body>
+</html>

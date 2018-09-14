@@ -1,0 +1,54 @@
+﻿@model MvcApplication1.Models.Person
+@*@model <MvcApplication1.Models.Person>    集合 各种类型都可设置*@
+           @*页面强类型定义作用:将自定义的字段设置成属性 防止书写途中代码混乱或错误
+               当前页面当中models的类型 是person 只能定义一个
+               实现了编译时错误检查 防止对于对象的属性的编写错误
+               设置:@model 获取 viewdata.model,html.***For(c=>.***) *@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HtmlTest</title>
+</head>
+<body>
+    <div>
+        @*HtmlHelper 快速完成表单布局*@
+        <a href="/home/Say">111</a><br />
+        <a href="@Url.Action("Add", "Home")?id=1">222</a><br />
+        @Html.ActionLink("333","HtmlTest","Home")<hr />
+        @{
+            string a1 = "1";
+            Response.Write("1");
+        }
+        @*可输出标签*@
+        @Html.Raw(" <a href='/home/index'>111</a><br />")<hr />
+        @{
+            string temp = "<b>123</b>";
+        }
+        @*标签会转化为编码字符*@
+        @Html.Encode(temp)<hr />
+        @using (Html.BeginForm("Index","Home",FormMethod.Get))
+        {
+            @Html.TextBox("QQ")
+            //@Html.TextBox()
+            
+            @Html.DropDownList("list")
+            <input type="submit" />
+        }
+        @ViewBag.user
+        @ViewData["QQ"]<hr />
+        @using (Html.BeginForm("Index","Home",FormMethod.Post))
+        {
+            //Func委托 兰姆达赋值 *For 系列必须和页面强类型一起使用
+            @Html.TextBoxFor(c=>c.QQ)
+        }
+        <hr />
+        @ViewData.Model.QQ
+    </div>
+</body>
+</html>

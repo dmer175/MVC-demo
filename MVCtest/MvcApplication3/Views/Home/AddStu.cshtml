@@ -1,0 +1,27 @@
+﻿@model MvcApplication3.Models.Student
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddStu</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("AddStu","Home",FormMethod.Post))
+        {
+            <span>ID</span><br />
+            @Html.TextBoxFor(s=>s.Sid)
+            <br />
+            <span>name:</span><br />
+            @Html.TextBoxFor(s=>s.Name)
+            
+            <input type="submit"/>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿@model EFtest.Models.Messages
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Edit","Update2",FormMethod.Post))
+        {
+            @Model.Id
+            @Html.HiddenFor(m=>m.Id)
+            <br />
+            @Html.TextBoxFor(n=>n.Messages1)
+            <br />
+            <input type="submit" value="修改"></input>
+        }
+    </div>
+</body>
+</html>

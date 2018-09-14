@@ -1,0 +1,36 @@
+﻿@model EFtest.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(function () {
+            $("#Id").blur(function () {
+                $.post("@Url.Action("Result","Test1",FormMethod.Get)", $("#Id").serialize(), function (data) {
+                    $("#msg").html(data);
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("Login","Test1",FormMethod.Post))
+    {
+        <span>id</span>
+        @Html.TextBoxFor(m=>m.Id)
+        <span id="msg">123</span>
+        <br />
+        <span>pwd</span>
+        @Html.TextBoxFor(m=>m.LoginPwd)
+        <input  type="submit" value="登录"/>
+    }
+</body>
+</html>

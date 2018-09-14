@@ -1,0 +1,4 @@
+D:\Myvs\20180622MVC\MVCtest\Model\bin\Debug\Model.dll
+D:\Myvs\20180622MVC\MVCtest\Model\bin\Debug\Model.pdb
+D:\Myvs\20180622MVC\MVCtest\Model\obj\Debug\Model.dll
+D:\Myvs\20180622MVC\MVCtest\Model\obj\Debug\Model.pdb

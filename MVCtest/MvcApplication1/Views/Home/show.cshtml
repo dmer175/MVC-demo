@@ -1,0 +1,45 @@
+﻿@using MvcApplication1.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>show</title>
+</head>
+<body>
+    <div>
+        show<br />
+        @{
+            int a1 = 10;
+            string str1 = "<h1>12364</h1>";
+            Response.Write(a1 + 1);
+            //Response.Write(str1);
+        }
+        <br />
+        @str1<br />
+        @a1<br />213
+        @*Razor中支持c#代码与HTML混合编写 (服务端注释)*@
+        @for (int i = 0; i < 10; i++)
+        {
+            if (i%2==0)
+            {
+                <span>123</span>
+                if (i%3==0)
+                {
+                    @i
+                }
+            }
+        }
+        <hr />
+        @{
+            Person per = new Person(){Age=10};
+            
+        }
+        @per.Age
+    </div>
+</body>
+</html>
